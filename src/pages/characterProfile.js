@@ -22,12 +22,12 @@ const CharacterProfile = () => {
     const { characterData, fetchStatus } = character;
 
     return (
-        <div className="m-auto flex items-center justify-center h-[85vh] flex-col">
+        <div className="m-auto flex items-center justify-center py-7 lg:py-0 lg:h-[85vh] flex-col">
             {fetchStatus !== "success" ? (
                 <Loader />
             ) : (
                 <>
-                <span className="font-roboto font-semibold mt-7 hover:cursor-pointer text-[#ed1d24]" onClick={()=>navigate(-1)}>RETURN HOME</span>
+                <span className="font-roboto font-semibold mb-5 lg:mb-0 mt-7 hover:cursor-pointer text-[#ed1d24]" onClick={()=>navigate(-1)}>RETURN HOME</span>
                     <CharacterCard characterData={characterData} />
                 </>
             )}

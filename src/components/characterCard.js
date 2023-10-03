@@ -2,15 +2,15 @@ import { Heading } from "./heading";
 
 const CharacterCard = ({characterData}) => {
     return (
-        <div className="grid grid-cols-2   max-w-[1100px] bg-[#f5f5f5]  m-auto border border-black p-5 border-b-8 shadow-xl font-montserrat">
-        <div className="h-[500px] w-[450px] flex ">
+        <div className="grid mx-4 lg:grid-cols-2 grid-cols-1 max-w-[1100px] bg-[#f5f5f5]  m-auto border border-black p-5 border-b-8 shadow-xl font-montserrat">
+        <div className="lg:h-[500px] lg:w-[450px]  flex ">
             <img
                 src={`${characterData[0]?.thumbnail?.path}.${characterData[0]?.thumbnail?.extension}`}
                 alt={`${characterData[0]?.name} thumbnail`}
-                className="h-[450px] w-[400px] object-cover m-auto"
+                className="lg:h-[450px] lg:w-[400px]  max-h-[450px] object-cover m-auto"
             />
         </div>
-        <div className="flex flex-col gap-2 py-8 text-center border-l px-5">
+        <div className="flex flex-col gap-2 lg:py-8 text-center border-l px-5">
             <Heading>Character Profile</Heading>
             <hr className="bg-black h-[2px]"></hr>
             <p className="text-[30px]  font-semibold mt-6 font-cinzel">

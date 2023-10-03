@@ -13,7 +13,11 @@ const MarvelCharacterList = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [characterData, setCharacterData] = useState([]);
+    // Sets the characters to display in thedropdown menu
+    const [dropdownData, setDropdownData] = useState([]);
+    // Sets the filtered Data selected by user
     const [characterFilters, setCharacterFilters] = useState({});
+    // To display Dropdown options
     const [showFilters, setFilters] = useState(false);
 
     const [pieChartData, setPieChartData] = useState({
@@ -46,6 +50,7 @@ const MarvelCharacterList = () => {
         }));
 
         setCharacterData(characterInfo);
+        setDropdownData(characterData);
     }, [data]);
 
     useEffect(() => {
@@ -59,7 +64,7 @@ const MarvelCharacterList = () => {
                 },
             ],
         });
-    }, [characterData, currentPage]);
+    }, [characterData, currentPage,dropdownData]);
 
     // Handle character toggle (enable/disable)
     const toggleCharacter = (characterName) => {
@@ -143,7 +148,7 @@ const MarvelCharacterList = () => {
                                 }
                             >
                                 <FilterList
-                                    data={characterData}
+                                    data={dropdownData}
                                     showFilters={showFilters}
                                     characterFilters={characterFilters}
                                     onChange={(characterName) =>
