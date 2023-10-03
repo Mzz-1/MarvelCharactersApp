@@ -50,7 +50,7 @@ const MarvelCharacterList = () => {
         }));
 
         setCharacterData(characterInfo);
-        setDropdownData(characterData);
+        setDropdownData(characterInfo);
     }, [data]);
 
     useEffect(() => {
@@ -118,7 +118,9 @@ const MarvelCharacterList = () => {
                         disabled={currentPage === 1}
                         onClick={() => handlePageChange(currentPage - 1)}
                     />
-                    <span className="font-libre text-[22px]">{currentPage}</span>
+                    <span className="font-libre text-[22px]">
+                        {currentPage}
+                    </span>
                     <PaginationButtons
                         text="Next"
                         disabled={currentPage === totalPages}
