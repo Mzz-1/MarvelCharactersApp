@@ -22,12 +22,12 @@ export const SearchButton = ({ disable, onClick, text }) => {
     );
 };
 
-export const ActionButton = ({ disable, onClick, text,margint,marginb }) => {
+export const ActionButton = ({ disable, onClick, text,margint,marginb,float }) => {
     return (
         <button
             disabled={disable}
             onClick={onClick}
-            className={`px-5 py-3 rounded-md text-white bg-[#3f3838] font-cinzel ml-auto mb-${marginb} mt-${margint}`}
+            className={`px-5 py-3 rounded-md text-white bg-[#3f3838] min-w-[150px] font-cinzel ml-auto mb-${marginb} mt-${margint} float-${float}`}
         >
             {text}
         </button>

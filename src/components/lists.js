@@ -1,10 +1,4 @@
-import React from "react";
-
-export const FilterList = ({
-    data,
-    onChange,
-    characterFilters,
-}) => {
+export const FilterList = ({ data, onChange, characterFilters }) => {
     return (
         <>
             <ul className={"flex flex-col items-start text-left"}>

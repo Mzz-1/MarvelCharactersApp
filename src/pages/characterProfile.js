@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCharacter } from "../redux-store/characterStore";
+import { fetchCharacter } from "../redux-store/characterSlice";
 import { Loader } from "../components/loader";
 import CharacterCard from "../components/characterCard";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,9 @@ const CharacterProfile = () => {
 
     const dispatch = useDispatch();
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
+    //Fetch character information
     useEffect(() => {
         dispatch(fetchCharacter({ id }));
     }, []);
@@ -27,7 +28,12 @@ const CharacterProfile = () => {
                 <Loader />
             ) : (
                 <>
-                <span className="font-roboto font-semibold mb-5 lg:mb-0 mt-7 hover:cursor-pointer text-[#ed1d24]" onClick={()=>navigate(-1)}>RETURN HOME</span>
+                    <span
+                        className="font-roboto font-semibold mb-5 lg:mb-0 mt-7 hover:cursor-pointer text-[#ed1d24]"
+                        onClick={() => navigate(-1)}
+                    >
+                        RETURN HOME
+                    </span>
                     <CharacterCard characterData={characterData} />
                 </>
             )}

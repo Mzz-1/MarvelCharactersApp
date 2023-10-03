@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllCharacters } from "../redux-store/characterStore";
+import { fetchAllCharacters } from "../redux-store/characterSlice";
 import { PaginationButtons, ActionButton } from "../components/button";
 import { Loader } from "../components/loader";
 import { SearchBar } from "../components/search";
@@ -64,7 +64,7 @@ const MarvelCharacterList = () => {
                 },
             ],
         });
-    }, [characterData, currentPage,dropdownData]);
+    }, [characterData, currentPage, dropdownData]);
 
     // Handle character toggle (enable/disable)
     const toggleCharacter = (characterName) => {
@@ -90,6 +90,8 @@ const MarvelCharacterList = () => {
         });
         setCharacterData(filteredData);
     };
+
+    console.log(showFilters);
 
     return (
         <>
@@ -118,7 +120,7 @@ const MarvelCharacterList = () => {
                         disabled={currentPage === 1}
                         onClick={() => handlePageChange(currentPage - 1)}
                     />
-                    <span>{currentPage}</span>
+                    <span className="font-libre text-[22px]">{currentPage}</span>
                     <PaginationButtons
                         text="Next"
                         disabled={currentPage === totalPages}
@@ -136,7 +138,11 @@ const MarvelCharacterList = () => {
                     <div className="px-4">
                         <div className="text-right relative">
                             <ActionButton
-                                text="Show filters"
+                                text={
+                                    showFilters
+                                        ? "Hide filters"
+                                        : "Show filters"
+                                }
                                 marginb={7}
                                 onClick={() => setFilters(!showFilters)}
                             />
@@ -158,6 +164,7 @@ const MarvelCharacterList = () => {
 
                                 <ActionButton
                                     text="Filter Characters"
+                                    float={"right"}
                                     margint={6}
                                     onClick={() => filterCharacter()}
                                 />
