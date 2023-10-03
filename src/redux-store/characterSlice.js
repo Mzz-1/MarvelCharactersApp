@@ -29,7 +29,6 @@ export const fetchAllCharacters = createAsyncThunk(
             .catch((error) => {
                 console.error(error);
             });
-            console.log(response.data.data)
         return response.data.data;
     }
 );

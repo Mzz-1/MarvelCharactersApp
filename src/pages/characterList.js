@@ -91,8 +91,6 @@ const MarvelCharacterList = () => {
         setCharacterData(filteredData);
     };
 
-    console.log(showFilters);
-
     return (
         <>
             <div className="mb-[70px] text-center">
