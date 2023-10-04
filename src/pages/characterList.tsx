@@ -82,17 +82,21 @@ const MarvelCharacterList: React.FC<MarvelCharacterListInterFace> = () => {
         setDropdownData(characterInfo);
     }, [data]);
 
-    useEffect(() => {
+    const setDataForChart = (data) => {
         setPieChartData({
-            labels: characterData.map((character: any) => character.label),
+            labels: data.map((character: any) => character.label),
             datasets: [
                 {
                     label: "No of Comic book appearances",
-                    data: characterData.map((character) => character.value),
+                    data: data.map((character) => character.value),
                     backgroundColor: ["#FF6384"],
                 },
             ],
         });
+    };
+
+    useEffect(() => {
+        setDataForChart(characterData);
     }, [characterData, currentPage, dropdownData]);
 
     // Handle character toggle (enable/disable)
@@ -117,7 +121,7 @@ const MarvelCharacterList: React.FC<MarvelCharacterListInterFace> = () => {
                 characterFilters[characterLabel]
             );
         });
-        setCharacterData(filteredData);
+        setDataForChart(filteredData);
     };
 
     return (
