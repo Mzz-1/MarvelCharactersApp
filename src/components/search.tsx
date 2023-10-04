@@ -2,11 +2,13 @@ import { useState } from "react";
 import { SearchButton } from "./button";
 import { useDispatch } from "react-redux";
 import { fetchAllCharacters } from "../redux-store/characterSlice";
+
+
 export const SearchBar = () => {
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState<string>("");
     const dispatch = useDispatch();
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event:any) => {
         if (event.key === "Enter") {
             dispatch(fetchAllCharacters({ searchTerm }));
         }

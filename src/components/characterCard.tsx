@@ -1,6 +1,6 @@
 import { Heading } from "./heading";
 
-const CharacterCard = ({characterData}) => {
+const CharacterCard = ({characterData}:any) => {
     return (
         <div className="grid mx-4 lg:grid-cols-2 grid-cols-1 max-w-[1100px] bg-[#f5f5f5]  m-auto border border-black p-5 border-b-8 shadow-xl font-montserrat">
         <div className="lg:h-[500px] lg:w-[450px]  flex ">

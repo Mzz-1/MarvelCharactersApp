@@ -1,8 +1,18 @@
-export const FilterList = ({ data, onChange, characterFilters }) => {
+interface ListInterface {
+    data: any;
+    characterFilters: any;
+    onChange: any;
+}
+
+export const FilterList = ({
+    data,
+    onChange,
+    characterFilters,
+}: ListInterface) => {
     return (
         <>
             <ul className={"flex flex-col items-start text-left"}>
-                {data.map((character) => (
+                {data.map((character:any) => (
                     <li className="" key={character.label}>
                         <label className="mx-2">
                             <input

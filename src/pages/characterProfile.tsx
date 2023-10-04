@@ -6,7 +6,12 @@ import { Loader } from "../components/loader";
 import CharacterCard from "../components/characterCard";
 import { useNavigate } from "react-router-dom";
 
-const CharacterProfile = () => {
+interface CharacterProfileInterface {
+    characterData: any;
+    fetchStatus: string;
+}
+
+const CharacterProfile: React.FC<CharacterProfileInterface> = () => {
     const { id } = useParams();
 
     const dispatch = useDispatch();
@@ -18,7 +23,7 @@ const CharacterProfile = () => {
         dispatch(fetchCharacter({ id }));
     }, []);
 
-    const character = useSelector((state) => state.character);
+    const character = useSelector((state: any) => state.character);
 
     const { characterData, fetchStatus } = character;
 

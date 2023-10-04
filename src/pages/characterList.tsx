@@ -9,25 +9,54 @@ import { LineChart } from "../components/charts";
 import { Heading } from "../components/heading";
 import { FilterList } from "../components/lists";
 
-const MarvelCharacterList = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [currentPage, setCurrentPage] = useState(1);
-    const [characterData, setCharacterData] = useState([]);
-    // Sets the characters to display in thedropdown menu
-    const [dropdownData, setDropdownData] = useState([]);
-    // Sets the filtered Data selected by user
-    const [characterFilters, setCharacterFilters] = useState({});
-    // To display Dropdown options
-    const [showFilters, setFilters] = useState(false);
+interface MarvelCharacterListInterFace {
+    data: any;
+    fetchAllStatus: string;
+    totalPages: number;
+}
 
-    const [pieChartData, setPieChartData] = useState({
+interface characterDataInterface {
+    label: string[];
+    value: number;
+}
+
+interface PieChartDataInterface {
+    labels: string[];
+    datasets: {
+        label: string;
+        data: number[];
+        backgroundColor: string[];
+    }[];
+}
+
+interface CharacterFiltersInterface {
+    [characterLabel: string]: boolean;
+}
+
+const MarvelCharacterList: React.FC<MarvelCharacterListInterFace> = () => {
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [characterData, setCharacterData] = useState<
+        characterDataInterface[]
+    >([]);
+    // Sets the characters to display in thedropdown menu
+    const [dropdownData, setDropdownData] = useState<characterDataInterface[]>(
+        []
+    );
+    // Sets the filtered Data selected by user
+    const [characterFilters, setCharacterFilters] =
+        useState<CharacterFiltersInterface>({});
+    // To display Dropdown options
+    const [showFilters, setFilters] = useState<boolean>(false);
+
+    const [pieChartData, setPieChartData] = useState<PieChartDataInterface>({
         labels: [],
         datasets: [],
     });
 
     const dispatch = useDispatch();
 
-    const character = useSelector((state) => state.character);
+    const character = useSelector((state: any) => state.character);
 
     const { data, fetchAllStatus, totalPages } = character;
 
@@ -44,7 +73,7 @@ const MarvelCharacterList = () => {
     };
 
     useEffect(() => {
-        const characterInfo = data.map((character) => ({
+        const characterInfo = data.map((character: any) => ({
             label: character.name,
             value: character.comics.available,
         }));
@@ -55,7 +84,7 @@ const MarvelCharacterList = () => {
 
     useEffect(() => {
         setPieChartData({
-            labels: characterData.map((character) => character.label),
+            labels: characterData.map((character: any) => character.label),
             datasets: [
                 {
                     label: "No of Comic book appearances",
@@ -67,7 +96,7 @@ const MarvelCharacterList = () => {
     }, [characterData, currentPage, dropdownData]);
 
     // Handle character toggle (enable/disable)
-    const toggleCharacter = (characterName) => {
+    const toggleCharacter = (characterName: string) => {
         setCharacterFilters((prevFilters) => ({
             ...prevFilters,
             [characterName]: !prevFilters[characterName],
@@ -76,11 +105,11 @@ const MarvelCharacterList = () => {
 
     const filterCharacter = () => {
         // Extract character labels from the characterFilters object
-        const filteredCharacterLabels = Object.keys(characterFilters);
+        const filteredCharacterLabels: any = Object.keys(characterFilters);
 
         // Use the filter method to create a new array with characters that match the filter
         const filteredData = characterData.filter((character) => {
-            const characterLabel = character.label;
+            const characterLabel: any = character.label;
 
             // Check if the character label exists in the filter object and is set to true
             return (
@@ -95,12 +124,7 @@ const MarvelCharacterList = () => {
         <>
             <div className="mb-[70px] text-center">
                 <div className="md:ml-auto md:mr-5 md:w-[650px]  my-8">
-                    <SearchBar
-                        searchTerm={searchTerm}
-                        onClick={() =>
-                            dispatch(fetchAllCharacters({ searchTerm }))
-                        }
-                    />
+                    <SearchBar />
                 </div>
 
                 <div className="w-[90%] m-auto mb-10 max-w-[1000px] border-x">
@@ -155,7 +179,6 @@ const MarvelCharacterList = () => {
                             >
                                 <FilterList
                                     data={dropdownData}
-                                    showFilters={showFilters}
                                     characterFilters={characterFilters}
                                     onChange={(characterName) =>
                                         toggleCharacter(characterName)
